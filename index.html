@@ -8,23 +8,36 @@
 </head>
 <body>
 <div id="app">
-    <h1>{{ product }}</h1>
-    <img :src="image" style="width: 150px; height: auto">
-    <p>{{ description }}</p>
-    <p v-if="inStock">In stock</p>
-    <p v-else>Out of stock</p>
-    <ul>
-        <li v-for="detail in details">{{ detail }}</li>
-    </ul>
-    <div v-for="variant in variants" :key="variant.id">
-        {{variant.color}}
+    <div class="nav-bar"></div>
+
+    <div class="cart">Cart({{ cart }})</div>
+
+    <div class="product-display">
+        <div class="product-container">
+            <div class="product-image">
+                <img :class="{ 'out-of-stock-img': !inStock }" v-bind:src="image">
+            </div>
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p v-if="inStock">In Stock</p>
+                <p v-else>Out of Stock</p>
+                <ul>
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ul>
+                <div
+                        v-for="variant in variants"
+                        :key="variant.id"
+                        @mouseover="updateImage(variant.image)">
+                    {{ variant.color }}
+                </div>
+                <button class="button" v-on:click="addToCart">Add to Cart</button>
+            </div>
+        </div>
     </div>
-    <div v-for="size in sizes">{{size}}</div>
-    <a :href="url">Vue Mastery</a>
 </div>
-<!-- Import App -->
+
 <script src="./main.js"></script>
-<!-- Mount App -->
+
 <script>
     const mountedApp = app.mount('#app')
 </script>
