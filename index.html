@@ -10,6 +10,17 @@
 <div id="app">
     <h1>{{ product }}</h1>
     <p>{{ description }}</p>
+<!--    <p v-if="inStock">In stock</p>-->
+<!--    <p v-else>Out of stock</p>-->
+
+<!--    <p v-show="inStock">In stock</p>-->
+
+    <p v-if="inventory > 10">In stock</p>
+    <p v-else-if="inventory <=10 && inventory > 0">Almost out of stock</p>
+    <p v-else>Out of stock</p>
+
+    <p v-show="onSale">On sale</p>
+
     <img :src="image" style="width: 150px; height: auto">
     <a :href="url">Vue Mastery</a>
 </div>
